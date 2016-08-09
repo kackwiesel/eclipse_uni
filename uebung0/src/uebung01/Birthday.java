@@ -25,8 +25,9 @@ public class Birthday {
 			throw new InvalidBirthdayException("Falsches Datum");
 		}
 	}
-	/*public String toString(){
-		return theDay.toString();
-	}*/
+	@Override
+	public String toString(){
+		return this.theDay;
+	}
 }
 
