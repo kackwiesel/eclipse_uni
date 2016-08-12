@@ -1,5 +1,6 @@
 package uebung12;
 
+import java.util.Arrays;
 import java.util.Random;
 
 public class Kartenspiel {
@@ -21,9 +22,10 @@ public class Kartenspiel {
 	public void shuffle(){
 		Karte[] mixedGame = new Karte[this.game.length];
 		
-		for(int i=0; i<this.game.length; i++){
+		for(int i=0; i<mixedGame.length; i++){
 			int m = findNotNull();
-			mixedGame[i] = game[m];
+			mixedGame[i] = this.game[m];
+			this.game[m]=null;
 		}
 		
 		System.arraycopy(mixedGame, 0, this.game, 0, mixedGame.length);
@@ -31,14 +33,27 @@ public class Kartenspiel {
 	
 	public int findNotNull(){
 		int m;
-		do{
+		
+		/*do{
 			m = rand.nextInt(this.game.length);
 		}
-		while(this.game[m]== null);
+		while(this.game[m]== null);*/
 		
-		this.game[m] = null;
+		m=rand.nextInt(this.game.length);
 		
+		if (this.game[m]==null){
+			m=findNotNull();
+		}
 		return m;
+	}
+	
+	public void sort(){
+		Arrays.sort(game);
+	}
+	
+	public void addCards(Kartenspiel cards){
+		Kartenspiel tempholder = new Kartenspiel(this.game.length + cards.game.length);
+		
 	}
 	
 	@Override

@@ -9,5 +9,9 @@ public class KartenSpielTest {
 		game.shuffle();
 		
 		System.out.println(game);
+		
+		game.sort();
+		
+		System.out.println(game);
 	}
 }
