@@ -2,10 +2,10 @@ package uebung22;
 
 public class Fahrzeug {
 	
-	protected String name;
+	protected String name = "";
 	
-	protected double position;
-	protected double geschwindigkeit;
+	protected double position = 0.0;
+	protected double geschwindigkeit = 0.0;
 	
 	protected final double hoechstgeschwindigkeit;
 	protected final double beschleunigung;
@@ -18,16 +18,48 @@ public class Fahrzeug {
 		this.beschleunigung = beschleunigung;
 	}
 	
-	public double hoechstgeschwindigkeit(){
+	public double getHoechstgeschwindigkeit(){
 		return this.hoechstgeschwindigkeit;
+	}
+	
+	public double getBeschleunigung(){
+		return this.beschleunigung;
+	}
+	
+	double getPosition(){
+		return this.position;
+	}
+	
+	double getGeschwindigkeit(){
+		return this.geschwindigkeit;
 	}
 	
 	public static final double KMH_IN_MS(double kmh){
 		return kmh * 1000 / 3600;
 	}
 	
+	public void setPosition(double position){
+		this.position = position;
+	}
+	
+	public void setGeschwindigkeit(double geschwindigkeit){
+		this.geschwindigkeit = geschwindigkeit;
+	}
+	
 	public double beschleunigen(double sekunden){
-		return position;
+		
+		assert (getGeschwindigkeit() == 0);
+		
+		if (getBeschleunigung() * sekunden < KMH_IN_MS(getHoechstgeschwindigkeit())){
+			setPosition(0.5 * getBeschleunigung() * Math.pow(sekunden, 2));
+			
+		}
+		
+		else{
+			
+		}
+		
+		return getPosition();
 	}
 	
 	
