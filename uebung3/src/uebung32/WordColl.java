@@ -5,9 +5,10 @@ public class WordColl {
 	
 	private Vector<Word> words;
 	
-	public static final class Word{
+	public final class Word{
 		
 		String s;
+		int counter =1;
 		
 		public Word(String s){
 			this.s = s;
@@ -15,7 +16,7 @@ public class WordColl {
 	}
 	
 	public WordColl(String... sentences){
-		this.words = new Vector<Word>(sentences.length);
+		this.words = new Vector<Word>();
 		append(sentences);
 	}
 	
@@ -29,36 +30,78 @@ public class WordColl {
 	
 	public void append(String... sentences){
 		
-		for(String s: sentences){
-			StringTokenizer StrToken = new StringTokenizer(s);
+		for(String sentence: sentences){
+			StringTokenizer StrToken = new StringTokenizer(sentence);
 			
 			while (StrToken.hasMoreTokens()){
-				Word word = new Word(StrToken.nextToken());
-				words.addElement(word);
+				Word nextWordInSentence = new Word(StrToken.nextToken());
+				
+				if (!existWord(nextWordInSentence)){
+					words.addElement(nextWordInSentence);
+				}
 			}
 		}
 	}
 	
 	public int size(){
-		return words.size();
+		int size = 0;
+		
+		for (Word word: words){
+			size += word.counter;
+		}
+		return size;
 	}
 	
-	public int count(String s){
-		if (words.contains(s) == true){
-			int i = 0;
-			
+	public int count(String inputWord){
+		int counter = 0;
+		
+		for (Word checkedWord: words){
+			if (checkedWord.s.equals(inputWord)){
+				counter = checkedWord.counter;
+			}
+		}
+		return counter;
+	}
+	
+	public String top(){
+		String s = "";
+		int maxc = 0;
+		
 			for (Word checkedWord: words){
-				if (checkedWord.equals(s)){
-					i++;
+				if (maxc < checkedWord.counter){
+					maxc = checkedWord.counter;
+					s = "";
+				}
+				
+				if (maxc == checkedWord.counter){
+					s += checkedWord.s + " , ";
 				}
 			}
-			return i;
-		}
-		else return 0;
+		return s;
+	}
+	
+	public boolean existWord(Word newWord){
+		for (Word checkedWord: words){
+			if (checkedWord.s.equals(newWord.s)){
+				checkedWord.counter++;
+				
+				return true;
+			}
+		}	
+		return false;
 	}
 	
 	@Override
 	public String toString(){
-		return "" + size();
+		
+		String outputString = "";
+		
+		for (Word word: words){
+			outputString +=  "\n" + word.s + "\t\t| " + word.counter;
+		}
+		return "\n\n=================================================\n\n" +
+				"Word\t\t| count\n----------------------------------" + 
+				outputString + "\n-----------------------------------\n\n" + 
+				size() + "\n\n" + top();
 	}
 }

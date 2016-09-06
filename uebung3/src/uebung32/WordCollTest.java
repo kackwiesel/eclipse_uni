@@ -4,15 +4,40 @@ public class WordCollTest {
 
 	public static void main(String[] args) {
 		
-		String[] Test1 = {"Hallo bla bla bla"};
+		String[] Text1 = {"Das ist der erste Text"," Der erste Text ist gut"};
 		
-		WordColl Test = new WordColl(Test1);
+		WordColl Test1 = new WordColl(Text1);
 		
-		System.out.println(Test);
+		//komplette Ausgabe (toString)
 		
-		int i = Test.count("bla");
+		System.out.println(Test1);
+		
+		
+		//Test ob count funktioniert
+		
+		int i = Test1.count("Buch.");
 		
 		System.out.println("\n" + i);
+		
+		
+		
+		//kompletter Test nochmal
+		
+		
+		String[] Text2 = {"Hier in Imperia ist sehr schönes Wetter , aber es ist windig."," Ich habe mein 3. Bier"};
+		
+		WordColl Test2 = new WordColl(Text2);
+		
+		//komplette Ausgabe (toString)
+		
+		System.out.println(Test2);
+		
+		
+		//Test ob count funktioniert
+		
+		int j = Test2.count("Buch.");
+		
+		System.out.println("\n" + j);
 
 	}
 
