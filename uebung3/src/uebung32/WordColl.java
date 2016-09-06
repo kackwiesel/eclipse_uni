@@ -23,9 +23,9 @@ public class WordColl {
 	/*StringTokenizer zerlegt einen Sring in Tokens. 
 	 * Dazu wird im String nach Trennzweichen gesucht.
 	 * 
-	 * solange der String noch einen nächsten Token hat, wird ein neues word angelegt 
-	 * in dem der aktuelle Token gespeichert wird.
-	 * Dieses aktuelle word wird im Vector words gespeichert.
+	 * solange es tokens gibt, wird für jeden token ein neues word angelegt.
+	 * wird bei der prüfung durch extistWord() festgestellt, dass das wort in words noch nicht existiert,
+	 * wird es hinzugefügt.
 	 */
 	
 	public void append(String... sentences){
@@ -43,6 +43,8 @@ public class WordColl {
 		}
 	}
 	
+	//size() summiert die counter aller wörter auf
+	
 	public int size(){
 		int size = 0;
 		
@@ -51,6 +53,11 @@ public class WordColl {
 		}
 		return size;
 	}
+	
+	/*count() bekommt einen String übergeben und läuft words durch. für jeden string von jedem word in words wird geprüft 
+	 * ob der string mit dem übergebenen string übereinstimmt. wenn ja,
+	 * wird counter um eins erhöht.
+	 */
 	
 	public int count(String inputWord){
 		int counter = 0;
@@ -63,6 +70,10 @@ public class WordColl {
 		return counter;
 	}
 	
+	/*top() ermittelt welches wort am häufigsten vorkommt. 
+	 * kommen mehrere wörter gleich häufig vor, werden sie aufgelistet.
+	 */
+	
 	public String top(){
 		String s = "";
 		int maxc = 0;
@@ -72,13 +83,17 @@ public class WordColl {
 					maxc = checkedWord.counter;
 					s = "";
 				}
-				
 				if (maxc == checkedWord.counter){
 					s += checkedWord.s + " , ";
 				}
 			}
 		return s;
 	}
+	
+	/*extistWord bekommt das nächste wort im satz übergeben und vergleicht es mit jedem word aus words.
+	 * existiert das wort in words schon, wird bei diesem der counter inkrementiert und true zurück geliefert.
+	 * wenn nicht wird false zurück geliefert.
+	 */
 	
 	public boolean existWord(Word newWord){
 		for (Word checkedWord: words){
