@@ -24,14 +24,19 @@ public class Ort<E> {
 			eingelagertesElem = e;
 		}
 	}
+	
 	public E getEingelagertesElem(){
 		E e = eingelagertesElem;
 		return e;
 	}
+	
 	public int getOrtsId(){
 		return ortsId;
 	}
 	
-	
+	@Override
+	public String toString(){
+		return ortsId +": " + eingelagertesElem;
+	}
 
 }
