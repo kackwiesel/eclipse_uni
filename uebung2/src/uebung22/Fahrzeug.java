@@ -64,16 +64,16 @@ public abstract class Fahrzeug {
 			beschleunigungszeit = KMH_IN_MS(getHoechstgeschwindigkeit()) / getBeschleunigung();
 			setPosition(0.5 * getBeschleunigung() * Math.pow(beschleunigungszeit, 2) / 1000);
 			setGeschwindigkeit(getHoechstgeschwindigkeit());
-			fahren(sekunden - beschleunigungszeit / 1000);
+			fahren(sekunden - beschleunigungszeit / 60);
 		}
 		
-		return getPosition();
+		return this.getPosition();
 	}
 	
 	public double fahren(double minuten){
 		
 		setPosition(this.position += getGeschwindigkeit() * minuten / 60);
-		return getPosition();
+		return this.getPosition();
 	}
 	
 	@Override
